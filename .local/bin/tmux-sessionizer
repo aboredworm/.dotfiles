@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/projects/ds ~/work/ -mindepth 1 -maxdepth 2 -type d | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+
+#function conda_activate {
+#    config_file_path="$selected/.config/config.yaml"
+#
+#    if [ -f $file_name]; then
+#        conda_env=$(yq .CONDA_ENV $config_file_path)
+#        eval "$(micromamba shell hook --shell bash)"
+#        micromamba activate
+#        /usr/bin/micromamba activate $conda_env
+#    fi
+#
+#}
+
+
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+    tmux attach-session -t $selected_name
+else
+    tmux switch-client -t $selected_name
+fi
+
