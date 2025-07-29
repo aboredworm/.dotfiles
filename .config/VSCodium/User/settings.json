@@ -1,0 +1,53 @@
+{
+    "workbench.colorTheme": "Monokai Dimmed",
+    "editor.fontFamily": "'Noto Sans Mono Condensed Medium', monospace",
+    "editor.fontLigatures": false,
+    "editor.fontSize": 18,
+    "terminal.integrated.fontFamily": "'Noto Sans Mono Condensed Medium', monospace",
+    "terminal.integrated.fontSize": 18,
+    "workbench.colorCustomizations": {
+        "editor.background": "#191919",
+        "editor.foreground": "#ebdbb2",
+        "terminal.background": "#191919",
+        "terminal.foreground": "#ebdbb2",
+        "terminal.ansiBlack": "#1d2021",
+        "terminal.ansiRed": "#cc241d",
+        "terminal.ansiGreen": "#98971a",
+        "terminal.ansiYellow": "#d79921",
+        "terminal.ansiBlue": "#458588",
+        "terminal.ansiMagenta": "#b16286",
+        "terminal.ansiCyan": "#689d6a",
+        "terminal.ansiWhite": "#a89984",
+        "terminal.ansiBrightBlack": "#504945",
+        "terminal.ansiBrightRed": "#fb4934",
+        "terminal.ansiBrightGreen": "#b8bb26",
+        "terminal.ansiBrightYellow": "#fabd2f",
+        "terminal.ansiBrightBlue": "#83a598",
+        "terminal.ansiBrightMagenta": "#d3869b",
+        "terminal.ansiBrightCyan": "#8ec07c",
+        "terminal.ansiBrightWhite": "#fbf1c7",
+        "sideBar.background": "#191919",
+        "activityBar.background": "#191919",
+        "statusBar.background": "#191919"
+    },
+    "python.defaultInterpreterPath": "/home/amoore/.local/share/mamba/envs/baseball/bin/python",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "explorer.fileNesting.patterns": {
+        "*.ts": "${capture}.js",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "tsconfig.json": "tsconfig.*.json",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.db": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.s3db": "${capture}.${extname}-*"
+    }
+}
