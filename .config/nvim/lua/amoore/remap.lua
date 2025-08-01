@@ -42,38 +42,22 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>ip", "<cmd>silent !tmux split-window -h '/usr/bin/micromamba run -n base ipython'<CR>")
 
-vim.keymap.set(
-    "n",
-    "<leader>ee",
-    "oif err != nil {<CR>}<Esc>Oreturn err<Esc>"
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>ea",
-    "oassert.NoError(err, \"\")<Esc>F\";a"
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>ef",
-    "oif err != nil {<CR>}<Esc>Olog.Fatalf(\"error: %s\\n\", err.Error())<Esc>jj"
-)
-
-vim.keymap.set(
-    "n",
-    "<leader>el",
-    "oif err != nil {<CR>}<Esc>O.logger.Error(\"error\", \"error\", err)<Esc>F.;i"
-)
-
-vim.keymap.set("n", "<leader>ca", function()
-    require("cellular-automaton").start_animation("make_it_rain")
-end)
+vim.keymap.set('v', '<leader>s', [[:'<,'>s/\%V\%V/<Left><Left><Left><Left>]], { noremap = true })
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+vim.keymap.set("n", "<leader>oj", function()
+    vim.cmd("vsp ~/nb/pandas.md")
+end)
+
+vim.keymap.set('n', 'gd', function()
+  vim.cmd('vsplit')
+  vim.lsp.buf.definition()
+end, { desc = 'Goto Definition in Vertical Split' })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "json",
@@ -81,3 +65,4 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.formatprg = "jq"
     end,
 })
+
