@@ -100,6 +100,7 @@ alias gj=git_janitor
 alias python=python3
 alias t='tmux-sessionizer'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias s="nvim ${HOME}/Scratchpad.md"
 
 # Dotfile git setup
 alias dfc='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
