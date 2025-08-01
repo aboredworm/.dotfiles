@@ -14,6 +14,7 @@ function treesitter_setup()  -- This stays as a separate function
 
         highlight = {
             enable = true,
+            disable = { "csv" },
 
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false,
