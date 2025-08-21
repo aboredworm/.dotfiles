@@ -1,12 +1,48 @@
+-- Function to open LSP hover in a vertical split
+local function open_hover_in_vsplit()
+  -- Use the current buffer's LSP client to get position encoding
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  if #clients == 0 then
+    print("No LSP clients attached")
+    return
+  end
+  -- Default to utf-16 (common for LSP servers like pyright)
+  local position_encoding = clients[1].offset_encoding or "utf-16"
+
+  -- Request hover with explicit position encoding
+  local hover_result = vim.lsp.buf_request_sync(
+    0,
+    'textDocument/hover',
+    vim.lsp.util.make_position_params(0, position_encoding),
+    1000
+  )
+  if not hover_result or vim.tbl_isempty(hover_result) then
+    print("No hover information available")
+    return
+  end
+
+  local contents = hover_result[1].result.contents
+  local lines = type(contents) == 'string' and vim.split(contents, '\n') or vim.lsp.util.convert_input_to_markdown_lines(contents)
+
+  vim.cmd('vsplit')
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.api.nvim_win_set_buf(0, buf)
+  vim.api.nvim_buf_set_option(buf, 'filetype', 'markdown')
+  vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+  vim.api.nvim_buf_set_option(buf, 'modifiable', false)
+end
+
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",  -- Optional but recommended for LSP-powered completion
-        "hrsh7th/nvim-cmp",      -- Optional: Core completion engine
-        "L3MON4D3/LuaSnip",      -- Optional: Snippet engine for completion
-        "saadparwaiz1/cmp_luasnip", -- Optional: LuaSnip integration for cmp
+        "hrsh7th/cmp-nvim-lsp",  
+        "hrsh7th/nvim-cmp",      
+        "L3MON4D3/LuaSnip",      
+        "saadparwaiz1/cmp_luasnip", 
     },
 
     config = function()
@@ -21,19 +57,16 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "pyright"  -- Ensures pyright is installed via Mason
             },
             handlers = {
-                function(server_name) -- Default handler for all servers
+                function(server_name) 
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
                 end,
-                -- Removed other specific handlers (zls, lua_ls) as they're not needed for Python/pyright
             }
         })
 
-        -- Optional: Set up completion with LSP source (remove if you don't want completion)
         local cmp = require('cmp')
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
         cmp.setup({
@@ -47,6 +80,9 @@ return {
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 ['<C-f>'] = cmp.mapping.confirm({ select = true }),
                 ['<C-k>'] = cmp.mapping.complete(),
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                ['<C-g>'] = cmp.mapping(open_hover_in_vsplit, { 'i' }),
                 ['<Tab>'] = cmp.mapping(function(fallback)
                     if require('luasnip').expand_or_jumpable() then
                         require('luasnip').expand_or_jump()
@@ -74,7 +110,6 @@ return {
             })
         })
 
-        -- Diagnostic configuration (optional but improves UX)
         vim.diagnostic.config({
             float = {
                 focusable = false,
@@ -86,9 +121,5 @@ return {
             },
         })
 
-        -- To enable jump to definition, add this keybinding (e.g., in your init.lua or a keymaps file):
-        -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' })
-        -- This assumes the LSP is attached (which it will be for Python files after setup).
-        -- Pyright should automatically detect Python roots via pyproject.toml, setup.cfg, etc.
     end
 }
