@@ -3,7 +3,7 @@ function treesitter_setup()  -- This stays as a separate function
 
     configs.setup({
         -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-        ensure_installed = { "c", "lua", "python", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+        ensure_installed = { "c", "lua", "python", "vim", "vimdoc", "query", "markdown", "markdown_inline", "elixir", "eex", "heex" },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
@@ -18,7 +18,8 @@ function treesitter_setup()  -- This stays as a separate function
 
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false,
-        }  -- Fixed missing comma and proper table closure
+        },-- Fixed missing comma and proper table closure
+        indent = { enable = true }
     })
 end
 
