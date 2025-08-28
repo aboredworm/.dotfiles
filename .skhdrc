@@ -11,7 +11,7 @@ alt - c : yabai -m window --close
 alt - q : open -a Alacritty
 
 # Open chrome with opt + f
-alt - f : open -a "Google Chrome"
+alt - f : /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window
 
 # Move between spaces with opt + 12345
 alt - 1 : yabai -m space --focus 1

@@ -50,3 +50,5 @@ yabai -m config                                 \
 yabai -m query --displays --display 2 | jq '.spaces[]' | xargs -I{} yabai -m space {} --layout float
 yabai -m query --displays --display 3 | jq '.spaces[]' | xargs -I{} yabai -m space {} --layout float
 
+yabai -m rule --add app="Google Chrome" manage=on
+
