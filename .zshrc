@@ -106,7 +106,7 @@ alias s="nvim ${HOME}/Scratchpad.md"
 alias mount-nas="sudo mkdir /Volumes/nas && sudo mount -t nfs -v -o resvport,nolocks,rw NAS_HOST:NAS_EXPORT /Volumes/nas"
 
 # Dotfile git setup
-alias dfc='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dfc='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Shell integrations
 eval "$(fzf --zsh)"
