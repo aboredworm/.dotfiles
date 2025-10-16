@@ -24,6 +24,10 @@ white = "#fbf1c7"
 
 [font]
 size = 18
+normal.family = "FiraCode Nerd Font Mono"
+normal.style = "Regular"
+bold.family = "FiraCode Nerd Font Mono"
+bold.style = "Bold"
 
 [font.offset]
 x = 0

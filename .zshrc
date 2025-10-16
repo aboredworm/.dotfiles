@@ -57,6 +57,10 @@ zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
+# zsh plugin Styling
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#96948b"
+
+
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -138,3 +142,7 @@ else
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
+#
+
+# DOCKER
+unset DOCKER_HOST
