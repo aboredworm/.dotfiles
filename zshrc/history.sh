@@ -1,6 +1,6 @@
 # history.sh
 HISTSIZE=5000
-HISTFILE=~/.zsh_history
+HISTFILE=~/.histfile
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory
