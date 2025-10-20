@@ -11,5 +11,5 @@ alias t='tmux-sessionizer'
 alias conda="micromamba"
 
 # Dotfile git setup
-alias dfc='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dfc='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
