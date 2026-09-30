@@ -1,0 +1,21 @@
+# Core command-line and desktop packages for the checked-in Arch profile.
+alacritty
+brightnessctl
+dolphin
+fd
+firefox
+fzf
+git
+hyprland
+hyprpaper
+neovim
+noto-fonts
+pavucontrol
+pipewire
+playerctl
+tmux
+tofi
+waybar
+wireplumber
+zoxide
+zsh

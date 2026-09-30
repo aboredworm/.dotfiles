@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Run interactively so sudo can prompt through its normal secure mechanism.
+sudo mount /dev/disk/by-id/usb-DEVICE_PATH /mnt/share
+sudo systemctl start jellyfin.service

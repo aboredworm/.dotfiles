@@ -1,7 +1,3 @@
-INITS=$(fd -e sh . ~/zshrc/init)
-
-FILES=($(echo $INITS | tr '\n' ' '))
-
-for FILE in $FILES; do
-    source $FILE
+for FILE in "$HOME"/zshrc/init/*.sh(N); do
+  source "$FILE"
 done

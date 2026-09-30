@@ -1,7 +1,14 @@
-# completion.sh
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+if [[ -n "${LS_COLORS:-}" ]]; then
+  zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+fi
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  LS_PREVIEW='ls -G'
+else
+  LS_PREVIEW='ls --color=auto'
+fi
+zstyle ':fzf-tab:complete:cd:*' fzf-preview "$LS_PREVIEW $realpath"
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview "$LS_PREVIEW $realpath"

@@ -1,0 +1,24 @@
+{
+  "lastChangelogVersion": "0.99.1",
+  "theme": "dark",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-luna",
+  "defaultThinkingLevel": "max",
+  "modelThinkingLevels": {
+    "openai-codex/gpt-6-luna": "max",
+    "openai-codex/gpt-6.1-sol": "high"
+  },
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:@llblab/pi-codex-usage"
+  ],
+  "enabledModels": [
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6.1-sol"
+  ],
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-6-luna",
+    "defaultThinking": "xhigh"
+  }
+}

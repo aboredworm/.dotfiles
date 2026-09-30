@@ -1,0 +1,8 @@
+- Read relevant local files first when the answer is available in the codebase. If not, research online via pi-web-access. Before making a big change based on online research findings, confirm with me first.
+- Explain risky file edits and destructive commands before executing.
+- Write simply. Avoid AI-slop language: no flowery adjectives, unnecessary adverbs, or overly formal phrasing. Also avoid common patterns like the rule of 3 and negative parallelisms.
+- Avoid en dashes (–) and em dashes (—).
+- When weighing different implementations, do not heavily consider development time.
+- Always use git when available, and keep your commits manageable in scope. Don't let many uncommited changes pile up. Never push without me.
+- Prefer new branches for contained features. Use git worktrees when access to multiple branches concurrently is needed.
+- Do not use complex subagent setups unless explicitly asked.

@@ -1,0 +1,20 @@
+# Credentials and changing Pi state
+.pi/agent/auth.json
+.pi/agent/models-store.json
+.pi/agent/sessions/
+.pi/agent/npm/
+
+# Local editor/runtime files
+.config/nvim/.git/
+.config/nvim/.venv/
+.config/nvim/.local/
+.config/nvim/.jupyter/
+.config/nvim/.nvimlog
+.config/nvim/**/__pycache__/
+*.py[cod]
+
+# Machine-generated MPD state
+.config/mpd/mpd.db
+.config/mpd/mpd.log
+.config/mpd/mpd.pid
+.config/mpd/mpdstate

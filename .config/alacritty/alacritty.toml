@@ -39,7 +39,7 @@ y = 0
 
 [window]
 opacity = 0.80
-decorations = "Buttonless"
+decorations = "None"
 startup_mode = "Maximized"
 
 [window.padding]
