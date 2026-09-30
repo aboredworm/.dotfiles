@@ -150,6 +150,8 @@ for path in \
   .config/git/ignore \
   .config/tmux/tmux.conf \
   .local/bin/tmux-sessionizer \
+  .local/bin/tmux-background \
+  .local/bin/nvim-notes \
   .pi/agent/APPEND_SYSTEM.md \
   .pi/agent/settings.json; do
   link_path "$path"
@@ -164,6 +166,7 @@ case "$PROFILE" in
     for path in \
       Brewfile \
       .config/aerospace/aerospace.toml \
+      .config/aerospace/assign-startup-workspaces.sh \
       .config/alacritty/alacritty.toml \
       .config/ghostty/config.ghostty \
       .config/karabiner/karabiner.json \

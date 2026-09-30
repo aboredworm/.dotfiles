@@ -26,10 +26,20 @@ zinit light Aloxaf/fzf-tab
 # Oh My Zsh snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
-zinit snippet OMZP::archlinux
-zinit snippet OMZP::aws
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
+
+if [[ $OSTYPE == linux* ]] && (( $+commands[pacman] )); then
+  zinit snippet OMZP::archlinux
+fi
+
+if (( $+commands[aws] || $+commands[aws_completer] )); then
+  zinit snippet OMZP::aws
+fi
+
+if (( $+commands[kubectl] )); then
+  zinit snippet OMZP::kubectl
+  zinit snippet OMZP::kubectx
+fi
+
 zinit snippet OMZP::command-not-found
 
 autoload -Uz compinit && compinit

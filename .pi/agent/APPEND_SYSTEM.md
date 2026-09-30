@@ -1,8 +1,11 @@
 - Read relevant local files first when the answer is available in the codebase. If not, research online via pi-web-access. Before making a big change based on online research findings, confirm with me first.
 - Explain risky file edits and destructive commands before executing.
-- Write simply. Avoid AI-slop language: no flowery adjectives, unnecessary adverbs, or overly formal phrasing. Also avoid common patterns like the rule of 3 and negative parallelisms.
-- Avoid en dashes (–) and em dashes (—).
+- Write simply. Avoid AI-slop language: no flowery adjectives, unnecessary adverbs, or overly formal phrasing.
 - When weighing different implementations, do not heavily consider development time.
 - Always use git when available, and keep your commits manageable in scope. Don't let many uncommited changes pile up. Never push without me.
-- Prefer new branches for contained features. Use git worktrees when access to multiple branches concurrently is needed.
-- Do not use complex subagent setups unless explicitly asked.
+- Do not use inline comments or long docstrings unless absolutely necessary.
+Avoid known "LLM-isms", including all of the following:
+- Frequent use of em/en-dashes. Generally, just defer to using separate sentences. Don't overuse semi-colons to compensate.
+- The rule of three: You do not need to provide multiple examples in all cases. In some cases, it is easier to provide a single example, and you should only include salient examples when providing many.
+    - For example: "Designed for tougher materials such as tiles, metals, and plastics." reads much better as "Designed for tougher materials such as metals".
+- Negative parallelisms: "Not just X, but also Y", "Not X, but Y", or "Y rather than X". Prefer to state Y directly.

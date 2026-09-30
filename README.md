@@ -41,11 +41,11 @@ The existing remote is `git@github.com:moore-andrew05/.dotfiles.git`. The curren
 ## What is managed
 
 - Zsh and Powerlevel10k, including portable startup scripts under `zshrc/`
-- tmux, Neovim source config, and the `tmux-sessionizer` helper
+- tmux and Neovim source config, with tmux session, background-window, and notes helpers
 - Pi agent settings and `APPEND_SYSTEM.md`
 - macOS AeroSpace, Alacritty, Ghostty, Karabiner, MPD/rmpc, and Homebrew configuration
 - Existing Arch Hyprland, Waybar, Tofi, Alacritty, and VSCodium configuration under `platforms/archlinux/`
 
 Neovim's source configuration is included. Its machine-local `.git`, virtualenv, mamba install, and Jupyter runtime are not copied or linked. If a machine already has a separate Git repo at `~/.config/nvim`, the installer leaves it untouched; otherwise it links the Neovim config files. Pi auth, model-store, sessions, package installs, and SSH credentials are excluded. The Arch media-server helper uses normal interactive `sudo` and does not read a password file.
 
-Some desktop settings are hardware-specific (for example, Hyprland monitor and wallpaper paths). Review `platforms/archlinux/.config/hypr/` on a new Linux machine. The previous `start-media-server` script depended on a local password file and was deliberately replaced with an interactive-sudo version.
+Some settings are hardware-specific, including the AeroSpace monitor assignment, MPD output device, and Hyprland monitor and wallpaper paths. Review them when moving to another machine, including `platforms/archlinux/.config/hypr/` on Linux. The previous `start-media-server` script depended on a local password file and was deliberately replaced with an interactive-sudo version.

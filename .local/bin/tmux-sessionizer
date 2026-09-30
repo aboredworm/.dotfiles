@@ -1,34 +1,31 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
-if (($# > 1)); then
-  echo "Usage: tmux-sessionizer [project-directory]" >&2
-  exit 2
+paths=$(find "$HOME/projects" "$HOME/work/dev" -mindepth 1 -maxdepth 1 -type d 2>/dev/null)
+
+if [[ $# -gt 0 ]]; then
+    paths=$(printf '%s\n' "$paths" | grep -iF -- "$1" || true)
 fi
 
-if (($# == 1)); then
-  selected="$1"
+selected=$(printf '%s\n' "$paths" | fzf)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+if [[ -z $TMUX ]]; then
+    tmux attach-session -t $selected_name
 else
-  command -v fzf >/dev/null 2>&1 || { echo "tmux-sessionizer needs fzf" >&2; exit 1; }
-  roots=("$HOME/projects" "$HOME/work/dev")
-  projects=()
-  for root in "${roots[@]}"; do
-    [[ -d "$root" ]] && projects+=("$root")
-  done
-  ((${#projects[@]})) || { echo "No project directories found" >&2; exit 1; }
-  selected="$(find "${projects[@]}" -mindepth 1 -maxdepth 2 -type d -print | sort | fzf)" || exit 0
-fi
-
-[[ -n "$selected" ]] || exit 0
-[[ -d "$selected" ]] || { echo "Not a directory: $selected" >&2; exit 1; }
-
-name="$(basename "$selected" | tr -cs '[:alnum:]_-' '_')"
-if ! tmux has-session -t "$name" 2>/dev/null; then
-  tmux new-session -d -s "$name" -c "$selected"
-fi
-
-if [[ -n "${TMUX:-}" ]]; then
-  tmux switch-client -t "$name"
-else
-  tmux attach-session -t "$name"
+    tmux switch-client -t $selected_name
 fi
