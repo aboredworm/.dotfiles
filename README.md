@@ -22,7 +22,7 @@ Package installation is opt-in:
 ./install.sh --packages
 ```
 
-On macOS this runs Homebrew Bundle from `Brewfile`. On Arch it installs the listed pacman packages and prompts through `sudo`. Other Linux distributions get the common dotfiles only; install their dependencies separately.
+On macOS this runs Homebrew Bundle from `Brewfile` with `--no-upgrade`: missing packages are installed, but already-installed packages are not broadly upgraded. Brewfile entries are not exact-version locks; Homebrew resolves current releases (versioned formula names such as `python@3.14` only constrain the major/minor line). Run `brew bundle upgrade --file=~/dotfiles/Brewfile` when you want to update them. On Arch it installs the listed pacman packages and prompts through `sudo`. Other Linux distributions get the common dotfiles only; install their dependencies separately.
 
 ## Maintain
 

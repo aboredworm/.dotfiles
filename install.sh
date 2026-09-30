@@ -117,7 +117,7 @@ install_packages() {
   case "$PROFILE" in
     macos)
       command -v brew >/dev/null 2>&1 || { echo "Homebrew is required for --packages" >&2; exit 1; }
-      brew bundle install --file="$REPO_DIR/Brewfile"
+      brew bundle install --no-upgrade --file="$REPO_DIR/Brewfile"
       ;;
     archlinux)
       command -v pacman >/dev/null 2>&1 || { echo "pacman is required for --packages" >&2; exit 1; }
