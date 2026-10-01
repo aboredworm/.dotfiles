@@ -4,6 +4,7 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
   "defaultThinkingLevel": "max",
+  "defaultTools": ["+codemode"],
   "modelThinkingLevels": {
     "openai-codex/gpt-6-luna": "max",
     "openai-codex/gpt-6.1-sol": "high"
