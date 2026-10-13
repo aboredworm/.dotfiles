@@ -167,6 +167,7 @@ case "$PROFILE" in
       Brewfile \
       .config/aerospace/aerospace.toml \
       .config/aerospace/assign-startup-workspaces.sh \
+      .config/aerospace/toggle-second-display.sh \
       .config/alacritty/alacritty.toml \
       .config/ghostty/config.ghostty \
       .config/karabiner/karabiner.json \
