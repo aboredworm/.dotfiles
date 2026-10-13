@@ -1,13 +1,17 @@
 {
-  "lastChangelogVersion": "0.99.1",
+  "lastChangelogVersion": "1.1.0",
   "theme": "dark",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
   "defaultThinkingLevel": "max",
-  "defaultTools": ["+codemode"],
+  "defaultTools": [
+    "+codemode"
+  ],
   "modelThinkingLevels": {
     "openai-codex/gpt-6-luna": "max",
-    "openai-codex/gpt-6.1-sol": "high"
+    "openai-codex/gpt-6.1-sol": "high",
+    "anthropic/claude-sonnet-5-5": "high",
+    "anthropic/claude-opus-5-5": "medium"
   },
   "packages": [
     "npm:pi-web-access",
@@ -16,7 +20,9 @@
   ],
   "enabledModels": [
     "openai-codex/gpt-6-luna",
-    "openai-codex/gpt-6.1-sol"
+    "openai-codex/gpt-6.1-sol",
+    "anthropic/claude-opus-5-5",
+    "anthropic/claude-sonnet-5-5"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-6-luna",

@@ -157,6 +157,7 @@ on-mode-changed = []
     alt-f = 'exec-and-forget open -n -a "Google Chrome"'
     alt-q = 'exec-and-forget open -n -a Alacritty'
     alt-shift-m = 'exec-and-forget ~/.config/aerospace/toggle-second-display.sh'
+    alt-e = 'exec-and-forget open -a "Nimble Commander"'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-backtick = 'move-node-to-workspace 0'
