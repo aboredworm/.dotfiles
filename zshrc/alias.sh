@@ -12,7 +12,13 @@ alias cdd='cd ..'
 alias cddd='cd ../..'
 alias python=python3
 alias t='tmux-sessionizer'
-alias mount-nas="sudo mkdir -p /Volumes/nas && sudo mount -t nfs -v -o resvport,nolocks,rw NAS_HOST:NAS_EXPORT /Volumes/nas"
+mount_nas() {
+  : "${NAS_HOST:?Set NAS_HOST before mounting the NAS}"
+  : "${NAS_EXPORT:?Set NAS_EXPORT before mounting the NAS}"
+  sudo mkdir -p /Volumes/nas
+  sudo mount -t nfs -v -o resvport,nolocks,rw "${NAS_HOST}:${NAS_EXPORT}" /Volumes/nas
+}
+alias mount-nas=mount_nas
 alias conda='micromamba'
 alias lg='lazygit'
 alias g='git'

@@ -13,6 +13,9 @@
 .config/nvim/**/__pycache__/
 *.py[cod]
 
+# Machine-local display identifier
+/.config/aerospace/display-uuid
+
 # Machine-generated MPD state
 .config/mpd/mpd.db
 .config/mpd/mpd.log

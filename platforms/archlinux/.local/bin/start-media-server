@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Run interactively so sudo can prompt through its normal secure mechanism.
-sudo mount /dev/disk/by-id/usb-DEVICE_PATH /mnt/share
+if (($# != 1)); then
+  echo "Usage: start-media-server DEVICE_PATH" >&2
+  exit 2
+fi
+
+sudo mount "$1" /mnt/share
 sudo systemctl start jellyfin.service
