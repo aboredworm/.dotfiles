@@ -155,8 +155,8 @@ on-mode-changed = []
     alt-q = 'exec-and-forget open -n -a Alacritty'
     alt-shift-m = 'exec-and-forget ~/.config/aerospace/toggle-second-display.sh'
     alt-e = 'exec-and-forget open -a "Nimble Commander"'
-    alt-u = 'exec-and-forget ~/.local/share/minilaunch/toggle.sh'
-    alt-shift-u = 'exec-and-forget ~/.local/share/minilaunch/demo-toggle.sh'
+    alt-u = 'exec-and-forget ~/projects/minilaunch/toggle.sh'
+    alt-shift-u = 'exec-and-forget ~/projects/minilaunch/demo-toggle.sh'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-backtick = 'move-node-to-workspace 0'
