@@ -157,8 +157,7 @@ on-mode-changed = []
     alt-e = 'exec-and-forget open -a "Nimble Commander"'
     alt-u = 'exec-and-forget exec ~/.local/share/minilaunch/MiniLaunch.app/Contents/MacOS/MiniLaunch --toggle'
     alt-shift-u = 'exec-and-forget ~/.local/share/minilaunch/demo-toggle.sh'
-    ctrl-alt-u = 'exec-and-forget exec ~/.local/share/minilaunch-prototype/MiniLaunch.app/Contents/MacOS/MiniLaunch --toggle'
-    ctrl-alt-shift-u = 'exec-and-forget ~/.local/share/minilaunch-prototype/quit.sh'
+    ctrl-alt-shift-u = 'exec-and-forget exec ~/.local/share/minilaunch/MiniLaunch.app/Contents/MacOS/MiniLaunch --quit'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-backtick = 'move-node-to-workspace 0'
