@@ -6,6 +6,7 @@ TARGET_HOME="${DOTFILES_HOME:-$HOME}"
 PROFILE=""
 DRY_RUN=0
 INSTALL_PACKAGES=0
+INSTALL_MINILAUNCH=0
 BACKUP_ROOT="$TARGET_HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)-$$"
 
 usage() {
@@ -14,7 +15,8 @@ Usage: ./install.sh [options]
 
 Options:
   --profile NAME   Select macos, archlinux, or common (default: detect OS)
-  --packages       Install packages from Brewfile or platforms/archlinux/packages.txt
+  --packages       Install packages, plus MiniLaunch and its font on macOS
+  --minilaunch     Install MiniLaunch and its font without other packages (macOS)
   --dry-run        Show links and backups without changing files
   -h, --help       Show this help
 EOF
@@ -29,6 +31,10 @@ while (($#)); do
       ;;
     --packages)
       INSTALL_PACKAGES=1
+      shift
+      ;;
+    --minilaunch)
+      INSTALL_MINILAUNCH=1
       shift
       ;;
     --dry-run)
@@ -61,6 +67,13 @@ case "$PROFILE" in
   macos|archlinux|common) ;;
   *) echo "Unknown profile: $PROFILE" >&2; exit 2 ;;
 esac
+if [[ "$INSTALL_MINILAUNCH" -eq 1 && "$PROFILE" != macos ]]; then
+  echo '--minilaunch requires the macos profile.' >&2
+  exit 2
+fi
+if [[ "$INSTALL_PACKAGES" -eq 1 && "$PROFILE" == macos ]]; then
+  INSTALL_MINILAUNCH=1
+fi
 
 link_item() {
   local source="$1" target="$2" relative="$3" backup
@@ -117,6 +130,10 @@ install_packages() {
   case "$PROFILE" in
     macos)
       command -v brew >/dev/null 2>&1 || { echo "Homebrew is required for --packages" >&2; exit 1; }
+      brew tap nikitabobko/tap
+      if brew command trust >/dev/null 2>&1; then
+        brew trust --cask nikitabobko/tap/aerospace
+      fi
       brew bundle install --no-upgrade --file="$REPO_DIR/Brewfile"
       ;;
     archlinux)
@@ -168,6 +185,7 @@ case "$PROFILE" in
       .config/aerospace/aerospace.toml \
       .config/aerospace/assign-startup-workspaces.sh \
       .config/aerospace/toggle-second-display.sh \
+      .config/minilaunch/config \
       .config/alacritty/alacritty.toml \
       .config/ghostty/config.ghostty \
       .config/karabiner/karabiner.json \
@@ -193,6 +211,14 @@ case "$PROFILE" in
     done
     ;;
 esac
+
+if [[ "$INSTALL_MINILAUNCH" -eq 1 ]]; then
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    DOTFILES_HOME="$TARGET_HOME" "$REPO_DIR/scripts/install-minilaunch.sh" --dry-run
+  else
+    DOTFILES_HOME="$TARGET_HOME" DOTFILES_BACKUP_ROOT="$BACKUP_ROOT" "$REPO_DIR/scripts/install-minilaunch.sh"
+  fi
+fi
 
 printf 'Installed dotfiles profile: %s\n' "$PROFILE"
 if [[ "$DRY_RUN" -eq 1 ]]; then
