@@ -46,6 +46,7 @@ for mode in modern legacy; do
   [[ -L "$home/.config/minilaunch/config" ]]
 done
 
+if [[ -x /usr/bin/shasum ]]; then
 mkdir -p "$ROOT/font-home/projects/minilaunch"
 printf '%s\n' '#!/bin/bash' 'echo Darwin' > "$ROOT/bin/uname"
 printf '%s\n' '#!/bin/bash' 'exit 0' > "$ROOT/bin/xcrun"
@@ -63,4 +64,7 @@ fi
 grep -q 'Font checksum mismatch' "$ROOT/font.log"
 [[ ! -e "$ROOT/font-home/Library/Fonts/NotoSansMono-ExtraCondensedBlack.ttf" ]]
 [[ ! -e "$ROOT/font-home/.local/share/minilaunch" ]]
-printf 'Bootstrap tests passed: dry-run, profile isolation, package integration, scoped tap trust, config links, font verification.\n'
+else
+  printf 'Skipping macOS font verification test: /usr/bin/shasum is unavailable.\n'
+fi
+printf 'Bootstrap tests passed: dry-run, profile isolation, package integration, scoped tap trust, config links.\n'

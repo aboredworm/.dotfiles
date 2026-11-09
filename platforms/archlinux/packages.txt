@@ -1,5 +1,5 @@
 # Official-repository packages for the shared CLI and Arch desktop configs.
-# Optional AUR tools (hyprshade, micromamba, quarto, dooit) are installed separately.
+# AUR desktop dependencies (tofi, hyprshade) and optional tools are installed separately.
 alacritty
 base-devel
 brightnessctl
@@ -26,7 +26,6 @@ python-pynvim
 ripgrep
 rmpc
 tmux
-tofi
 ttf-firacode-nerd
 unzip
 waybar

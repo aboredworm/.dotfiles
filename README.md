@@ -27,7 +27,7 @@ Package installation is opt-in:
 ./install.sh --packages
 ```
 
-On macOS this runs Homebrew Bundle from `Brewfile` with `--no-upgrade`, then installs MiniLaunch and its font. Missing packages are installed, but already-installed packages are not broadly upgraded. The installer adds AeroSpace's tap and, on Homebrew versions with tap-trust controls, trusts only its named cask. Brewfile entries are not exact-version locks; Homebrew resolves current releases (versioned formula names such as `python@3.14` only constrain the major/minor line). Run `brew bundle upgrade --file=~/projects/dotfiles/Brewfile` when you want to update them. On Arch it runs `sudo pacman -S --needed` with `platforms/archlinux/packages.txt`, prompting normally through `sudo`. It does not refresh package databases or perform a system upgrade; update Arch separately with `sudo pacman -Syu` before installing against stale databases. AUR tools such as hyprshade, micromamba, Quarto, and dooit are optional and are not installed automatically. Other Linux distributions get the common dotfiles only; install their dependencies separately.
+On macOS this runs Homebrew Bundle from `Brewfile` with `--no-upgrade`, then installs MiniLaunch and its font. Missing packages are installed, but already-installed packages are not broadly upgraded. The installer adds AeroSpace's tap and, on Homebrew versions with tap-trust controls, trusts only its named cask. Brewfile entries are not exact-version locks; Homebrew resolves current releases (versioned formula names such as `python@3.14` only constrain the major/minor line). Run `brew bundle upgrade --file=~/projects/dotfiles/Brewfile` when you want to update them. On Arch it runs `sudo pacman -S --needed` with `platforms/archlinux/packages.txt`, prompting normally through `sudo`. It does not refresh package databases or perform a system upgrade; update Arch separately with `sudo pacman -Syu` before installing against stale databases. Tofi (the launcher) and hyprshade (nightlight) are AUR dependencies for the checked-in desktop config; install them separately with your preferred AUR workflow. Optional tools such as micromamba, Quarto, and dooit are also not installed automatically. Other Linux distributions get the common dotfiles only; install their dependencies separately.
 
 ## MiniLaunch
 
@@ -81,5 +81,15 @@ Installing replaces the managed live configs with links, backing up the old file
 The common and Arch profiles do not link macOS desktop configs or run Homebrew/MiniLaunch. Shared shell setup detects optional commands and uses Linux paths for pnpm and NAS mounts. Arch keeps `~/.histfile` as its default history file; an existing `$HISTFILE` is respected. PDF preview helpers resolve Quarto and Zathura from `PATH`. Neovim's plugins, language servers, and optional notebook/LaTeX tools still need their own setup.
 
 Neovim's source configuration is included. Its machine-local `.git`, virtualenv, mamba install, and Jupyter runtime are not copied or linked. If a machine already has a separate Git repo at `~/.config/nvim`, the installer leaves it untouched; otherwise it links the Neovim config files. Pi auth, model-store, sessions, package installs, and SSH credentials are excluded. The Arch media-server helper uses normal interactive `sudo` and does not read a password file.
+
+## Tests
+
+```sh
+./tests/bootstrap.sh
+./tests/archlinux.sh
+./tests/update.sh
+```
+
+Tests use temporary homes and local Git fixtures, mock package managers, and do not install packages or change live dotfiles. The macOS font checksum test is skipped when `/usr/bin/shasum` is unavailable.
 
 Some settings remain machine-specific. The AeroSpace display toggle reads its UUID from `~/.config/aerospace/display-uuid`, which is excluded from Git. The `mount-nas` helper expects `NAS_HOST` and `NAS_EXPORT` to be set locally; `NAS_MOUNT_POINT` overrides `/mnt/nas` on Linux or `/Volumes/nas` on macOS. Review the Hyprland monitor and wallpaper paths under `platforms/archlinux/.config/hypr/` when moving to Linux. The AeroSpace `Option+Shift+M` monitor toggle requires the free [`aspace` CLI](https://github.com/asumaran/aspace) at `~/.local/bin/aspace`. The Arch media-server helper accepts a device path as its argument and uses interactive `sudo`.
