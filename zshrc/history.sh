@@ -1,6 +1,10 @@
 # history.sh
 HISTSIZE=5000
-HISTFILE=~/.histfile
+if [[ "$OSTYPE" == darwin* ]]; then
+  HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
+else
+  HISTFILE="${HISTFILE:-$HOME/.histfile}"
+fi
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory

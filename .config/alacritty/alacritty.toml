@@ -23,11 +23,11 @@ cyan = "#8ec07c"
 white = "#fbf1c7"
 
 [font]
-size = 18
-normal.family = "FiraCode Nerd Font Mono"
-normal.style = "Regular"
-bold.family = "FiraCode Nerd Font Mono"
-bold.style = "Bold"
+size = 22
+normal.family = "FiraMono Nerd Font Mono"
+bold.family = "FiraMono Nerd Font Mono"
+italic.family = "FiraMono Nerd Font Mono"
+bold_italic.family = "FiraMono Nerd Font Mono"
 
 [font.offset]
 x = 0
@@ -38,7 +38,9 @@ x = 0
 y = 0
 
 [window]
-opacity = 0.75
+opacity = 0.80
+decorations = "None"
+startup_mode = "Maximized"
 
 [window.padding]
 x = 5
@@ -56,3 +58,4 @@ bindings = [
   { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
   { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
 ]
+

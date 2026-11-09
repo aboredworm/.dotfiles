@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    selected=$(find ~/projects/ -mindepth 2 -maxdepth 2 -type d)
-    selected+=$(find ~/work/ -mindepth 1 -maxdepth 1 -type d)
-    selected=$(echo "$selected" | fzf)
+paths=$(find "$HOME/projects" "$HOME/work/dev" -mindepth 1 -maxdepth 1 -type d 2>/dev/null)
+
+if [[ $# -gt 0 ]]; then
+    paths=$(printf '%s\n' "$paths" | grep -iF -- "$1" || true)
 fi
+
+selected=$(printf '%s\n' "$paths" | fzf)
 
 if [[ -z $selected ]]; then
     exit 0
@@ -14,21 +14,6 @@ fi
 
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
-
-
-#function conda_activate {
-#    config_file_path="$selected/.config/config.yaml"
-#
-#    if [ -f $file_name]; then
-#        conda_env=$(yq .CONDA_ENV $config_file_path)
-#        eval "$(micromamba shell hook --shell bash)"
-#        micromamba activate
-#        /usr/bin/micromamba activate $conda_env
-#    fi
-#
-#}
-
-
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
     tmux new-session -s $selected_name -c $selected
@@ -44,4 +29,3 @@ if [[ -z $TMUX ]]; then
 else
     tmux switch-client -t $selected_name
 fi
-

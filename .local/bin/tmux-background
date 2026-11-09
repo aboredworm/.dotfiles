@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if (( $# < 2 || $# > 3 )); then
+    printf 'usage: %s WINDOW COMMAND [DIRECTORY]\n' "${0##*/}" >&2
+    exit 2
+fi
+
+session=tools
+window=$1
+app_command=$2
+directory=${3:-$HOME}
+
+if ! tmux has-session -t "$session" 2>/dev/null; then
+    tmux new-session -d -s "$session" -n "$window" -c "$directory" "$app_command"
+elif ! tmux list-windows -t "$session" -F '#{window_name}' | grep -Fxq "$window"; then
+    tmux new-window -d -t "$session" -n "$window" -c "$directory" "$app_command"
+fi
+
+tmux switch-client -t "$session:$window"

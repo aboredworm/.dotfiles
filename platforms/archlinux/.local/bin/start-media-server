@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (($# != 1)); then
+  echo "Usage: start-media-server DEVICE_PATH" >&2
+  exit 2
+fi
+
+sudo mount "$1" /mnt/share
+sudo systemctl start jellyfin.service
